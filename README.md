@@ -18,7 +18,7 @@ In this data science project, the **relationship between preparation time and th
 | 'n_ingredients' | Number of ingredients in recipe |
 <br>
 
-**Dataset #2: Ratings** (731,927 rows)
+**Dataset #2: Interactions** (731,927 rows)
 | Column | Description |
 | ----------- | ----------- |
 | 'rating' | Rating given |
