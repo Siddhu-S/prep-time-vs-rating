@@ -54,8 +54,8 @@ The distribution of preparation time shows that most of the data is for recipes 
 
 <iframe
   src="assets/prep_box.html"
-  width="800"
-  height="600"
+  width="100%"
+  height="400"
   frameborder="0"
 ></iframe>
 
