@@ -8,19 +8,20 @@ In this data science project, the **relationship between preparation time and th
 <br>
 
 **Dataset #1: Recipes** (83,782 rows)
-| Column | Description |
-| ----------- | ----------- |
-| 'name' | Recipe name |
-| 'minutes' | Minutes to prepare recipe |
-| 'tags' | Food.com tags for recipe |
-| 'nutrition' | Nutrition information in the form [calories (#), total fat (PDV), sugar (PDV), sodium (PDV), protein (PDV), saturated fat (PDV), carbohydrates (PDV)]; PDV stands for “percentage of daily value” |
-| 'n_steps' | Number of steps in recipe |
-| 'n_ingredients' | Number of ingredients in recipe |
-<br>
+
+| Column         | Description                                                                 |
+|----------------|-----------------------------------------------------------------------------|
+| name           | Recipe name                                                                 |
+| minutes        | Minutes to prepare recipe                                                   |
+| tags           | Food.com tags for recipe                                                    |
+| nutrition      | Nutrition info: [calories, total fat (PDV), sugar (PDV), sodium (PDV), protein (PDV), saturated fat (PDV), carbohydrates (PDV)] |
+| n_steps        | Number of steps in recipe                                                   |
+| n_ingredients  | Number of ingredients in recipe                                             |
 
 **Dataset #2: Interactions** (731,927 rows)
-| Column | Description |
-| ----------- | ----------- |
-| 'rating' | Rating given |
-| 'review' | Review text |
+
+| Column | Description       |
+|--------|-------------------|
+| rating | Rating given      |
+| review | Review text       |
 
