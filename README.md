@@ -12,6 +12,7 @@ In this data science project, the **relationship between preparation time and th
 | Column         | Description                                                                 |
 |----------------|-----------------------------------------------------------------------------|
 | name           | Recipe name                                                                 |
+| id             | Recipe ID                                                                   |
 | minutes        | Minutes to prepare recipe                                                   |
 | tags           | Food.com tags for recipe                                                    |
 | nutrition      | Nutrition info: [calories, total fat (PDV), sugar (PDV), sodium (PDV), protein (PDV), saturated fat (PDV), carbohydrates (PDV)] |
@@ -20,10 +21,11 @@ In this data science project, the **relationship between preparation time and th
 
 **Dataset #2: Interactions** (731,927 rows)
 
-| Column | Description       |
-|--------|-------------------|
-| rating | Rating given      |
-| review | Review text       |
+| Column    | Description       |
+|-----------|-------------------|
+| recipe_id	| Recipe ID         |
+| rating    | Rating given      |
+| review    | Review text       |
 
 
 With the findings from this project, we can have a better insight into what factors make a recipe more popular (in this case having a higher rating), and it can better inform a food.com user on what recipes, their audience would respond better too.
@@ -42,6 +44,15 @@ Before starting exploration into the data, we cleaned the data using the followi
 
 5. Create column 'is_short' to be used in later analysis, gives a boolean value depending on if the prep time for the recipe was less than or equal to 30 minutes
 
+After fully cleaning the data, the merged dataframe looks as follows:
+| name                                 |   minutes |   n_steps |   n_ingredients |   rating |   avg_rating | is_short   |
+|:-------------------------------------|----------:|----------:|----------------:|---------:|-------------:|:-----------|
+| 1 brownies in the world    best ever |        40 |        10 |               9 |        4 |            4 | False      |
+| 1 in canada chocolate chip cookies   |        45 |        12 |              11 |        5 |            5 | False      |
+| 412 broccoli casserole               |        40 |         6 |               9 |        5 |            5 | False      |
+| 412 broccoli casserole               |        40 |         6 |               9 |        5 |            5 | False      |
+| 412 broccoli casserole               |        40 |         6 |               9 |        5 |            5 | False      |
+
 ### Exploratory Data Analysis
 <iframe
   src="assets/prep_hist.html"
@@ -59,4 +70,15 @@ The distribution of preparation time shows that most of the data is for recipes 
   frameborder="0"
 ></iframe>
 
-The distribution of the average rating based on the preparation time ranges shows a general trend of the average rating of each bin going down as more preparation time is added in, although the average rating data is very concentrated between 4-5, showing most of the data is good ratings which could skew the analysis.
+The distribution of the average rating based on the preparation time ranges shows that there isnt a clear difference between each of the bins because the data seems fairly distributed between all the categories, with the quartiles each being roughly the same. However, in the less than 15 minutes category it does have the largest median at 4.9, but there isn't a clear trend in the other categories.
+
+| prep_time_bin   |   avg_rating_mean |   recipe_count |
+|:----------------|------------------:|---------------:|
+| <15             |           4.71484 |          48431 |
+| 15–30           |           4.67837 |          58153 |
+| 30–60           |           4.66619 |          69377 |
+| 1–2 hr          |           4.67641 |          31817 |
+| 2–3 hr          |           4.66468 |           7167 |
+| 3+ hrs          |           4.6267  |           8334 |
+
+In the pivot table, focusing on the means of each of the bins, it reinforces that there isn't a clear trend between prep time and the average rating, but less than 15 minutes does have the largest average rating at 4.71 and 3+ hrs does have the smallest average rating at 4.63.
