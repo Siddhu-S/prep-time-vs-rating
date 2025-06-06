@@ -45,8 +45,8 @@ Before starting exploration into the data, we cleaned the data using the followi
 ### Exploratory Data Analysis
 <iframe
   src="assets/prep_hist.html"
-  width="800"
-  height="600"
+  width="100%"
+  height="400"
   frameborder="0"
 ></iframe>
 
