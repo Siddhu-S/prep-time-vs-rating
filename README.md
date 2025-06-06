@@ -45,6 +45,7 @@ Before starting exploration into the data, we cleaned the data using the followi
 5. Create column 'is_short' to be used in later analysis, gives a boolean value depending on if the prep time for the recipe was less than or equal to 30 minutes
 
 After fully cleaning the data, the merged dataframe looks as follows:
+
 | name                                 |   minutes |   n_steps |   n_ingredients |   rating |   avg_rating | is_short   |
 |:-------------------------------------|----------:|----------:|----------------:|---------:|-------------:|:-----------|
 | 1 brownies in the world    best ever |        40 |        10 |               9 |        4 |            4 | False      |
