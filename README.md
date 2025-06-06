@@ -72,6 +72,7 @@ The distribution of preparation time shows that most of the data is for recipes 
 
 The distribution of the average rating based on the preparation time ranges shows that there isnt a clear difference between each of the bins because the data seems fairly distributed between all the categories, with the quartiles each being roughly the same. However, in the less than 15 minutes category it does have the largest median at 4.9, but there isn't a clear trend in the other categories.
 
+
 | prep_time_bin   |   avg_rating_mean |   recipe_count |
 |:----------------|------------------:|---------------:|
 | <15             |           4.71484 |          48431 |
