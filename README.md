@@ -136,7 +136,7 @@ The question we're exploring is **do short prep time recipes have significantly 
 <iframe
   src="assets/ratings_perm.html"
   width="100%"
-  height="400"
+  height="600"
   frameborder="0"
 ></iframe>
 
