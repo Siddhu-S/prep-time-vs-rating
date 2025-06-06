@@ -43,18 +43,18 @@ Before starting exploration into the data, we cleaned the data using the followi
 4. Filter the data, removing all recipes that took 0 minutes or less and recipes that were over 360 minutes or 6 hrs. There were many outliers in the dataset, with some recipes taking multiple weeks, and when looking into relationship between preparation time and average rating, it makes the most sense to look at a generalized dataset of up to six hours which is the general max threshold for the time someone would take to create one meal.
 
 5. Create column 'is_short' to be used in later analysis, gives a boolean value depending on if the prep time for the recipe was less than or equal to 30 minutes
+225905, 19
+After fully cleaning the data, the merged dataframe with 19 columns and 225905 rows looks as follows:
 
-After fully cleaning the data, the merged dataframe looks as follows:
+|     id | name                                 |   minutes |   n_steps |   n_ingredients |   rating |   avg_rating | is_short   |
+|-------:|:-------------------------------------|----------:|----------:|----------------:|---------:|-------------:|:-----------|
+| 333281 | 1 brownies in the world    best ever |        40 |        10 |               9 |        4 |            4 | False      |
+| 453467 | 1 in canada chocolate chip cookies   |        45 |        12 |              11 |        5 |            5 | False      |
+| 306168 | 412 broccoli casserole               |        40 |         6 |               9 |        5 |            5 | False      |
+| 306168 | 412 broccoli casserole               |        40 |         6 |               9 |        5 |            5 | False      |
+| 306168 | 412 broccoli casserole               |        40 |         6 |               9 |        5 |            5 | False      |
 
-| name                                 |   minutes |   n_steps |   n_ingredients |   rating |   avg_rating | is_short   |
-|:-------------------------------------|----------:|----------:|----------------:|---------:|-------------:|:-----------|
-| 1 brownies in the world    best ever |        40 |        10 |               9 |        4 |            4 | False      |
-| 1 in canada chocolate chip cookies   |        45 |        12 |              11 |        5 |            5 | False      |
-| 412 broccoli casserole               |        40 |         6 |               9 |        5 |            5 | False      |
-| 412 broccoli casserole               |        40 |         6 |               9 |        5 |            5 | False      |
-| 412 broccoli casserole               |        40 |         6 |               9 |        5 |            5 | False      |
-
-### Exploratory Data Analysis
+### Univariate Analysis
 <iframe
   src="assets/prep_hist.html"
   width="100%"
@@ -64,6 +64,8 @@ After fully cleaning the data, the merged dataframe looks as follows:
 
 The distribution of preparation time shows that most of the data is for recipes that take under 80 minutes, with the most recipes being between the 20 - 40 minute range. With the is_short columnn it makes sense, to divide the data at the 30 minute mark to ensure theres enough data on both sides.
 
+### Bivariate Analysis
+
 <iframe
   src="assets/prep_box.html"
   width="100%"
@@ -72,6 +74,8 @@ The distribution of preparation time shows that most of the data is for recipes 
 ></iframe>
 
 The distribution of the average rating based on the preparation time ranges shows that there isnt a clear difference between each of the bins because the data seems fairly distributed between all the categories, with the quartiles each being roughly the same. However, in the less than 15 minutes category it does have the largest median at 4.9, but there isn't a clear trend in the other categories.
+
+### Interesting Aggregates
 
 
 | prep_time_bin   |   avg_rating_mean |   recipe_count |
@@ -84,3 +88,39 @@ The distribution of the average rating based on the preparation time ranges show
 | 3+ hrs          |           4.6267  |           8334 |
 
 In the pivot table, focusing on the means of each of the bins, it reinforces that there isn't a clear trend between prep time and the average rating, but less than 15 minutes does have the largest average rating at 4.71 and 3+ hrs does have the smallest average rating at 4.63.
+
+## Assessment of Missingness
+### NMAR Analysis
+There are four columns with missing data in my merged dataset
+
+| Column      | Missing Values    |
+|-----------  |-------------------|
+| description | 109               |
+| rating      | 14252             |
+| review      | 56                |
+| avg_rating  | 2626              |
+
+Out of all these columns, the most likely candidate for being NMAR is the 'review' column, because there can be many different reasons why someone would not leave a review for their rating. Unless they are a professional reviewer, unless a recipe is bad or extremely good, many people often will not leave a review for it, instead opting to just rate it out of 5. So here the 'review' column can be left with a lot of blank values seemingly at random but in reality it is because people choose not to leave reviews.
+
+### Missingness Dependency
+To now test the dependency of the 'review' column, we look at if the missigness in the 'review' column depends on either the 'minutes' column or the 'n_ingredients' column. To test this, I did permutation tests based on if the absolute value of average rating of the review column subtracted by the no review column for both the 'minutes' and 'n_ingredients' column provided any data that was statistically significant to 0.05.
+
+#### 'minutes'
+<iframe
+  src="assets/minutes_perm.html"
+  width="100%"
+  height="400"
+  frameborder="0"
+></iframe>
+
+For minutes, we see from the graph the red line indicating the test statistic doesn't have too much data to the right of it, and since we're testing the absolute value of the mean difference, we ended up getting a p value of **0.0210** for an observed difference in means of **15.3917**. The p value is less than 0.05 meaning that minutes could play a factor in whether a user leaves a review on a recipe that they rate.
+
+### 'n_ingredients'
+<iframe
+  src="assets/ingredients_perm.html"
+  width="100%"
+  height="400"
+  frameborder="0"
+></iframe>
+
+For n_ingredients, we see from the graph that the data is more evenly divided between the test statistic, and we end up getting a p value of **0.1470** for an observed difference in means of **0.7183**. The p value is greater than 0.05 meaning that according to the data, the number of ingredients a recipe has, does not affect whether someone would leave a review for a recipe they rated.
