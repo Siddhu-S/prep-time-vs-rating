@@ -50,3 +50,13 @@ Before starting exploration into the data, we cleaned the data using the followi
   frameborder="0"
 ></iframe>
 
+The distribution of preparation time shows that most of the data is for recipes that take under 80 minutes, with the most recipes being between the 20 - 40 minute range. With the is_short columnn it makes sense, to divide the data at the 30 minute mark to ensure theres enough data on both sides.
+
+<iframe
+  src="assets/prep_box.html"
+  width="800"
+  height="600"
+  frameborder="0"
+></iframe>
+
+The distribution of the average rating based on the preparation time ranges shows a general trend of the average rating of each bin going down as more preparation time is added in, although the average rating data is very concentrated between 4-5, showing most of the data is good ratings which could skew the analysis.
