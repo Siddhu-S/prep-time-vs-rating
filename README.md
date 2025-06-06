@@ -105,7 +105,7 @@ Out of all these columns, the most likely candidate for being NMAR is the 'revie
 ### Missingness Dependency
 To now test the dependency of the 'review' column, we look at if the missigness in the 'review' column depends on either the 'minutes' column or the 'n_ingredients' column. To test this, I did permutation tests based on if the absolute value of average rating of the review column subtracted by the no review column for both the 'minutes' and 'n_ingredients' column provided any data that was statistically significant to 0.05.
 
-#### 'minutes'
+#### minutes
 <iframe
   src="assets/minutes_perm.html"
   width="100%"
@@ -115,7 +115,7 @@ To now test the dependency of the 'review' column, we look at if the missigness 
 
 For minutes, we see from the graph the red line indicating the test statistic doesn't have too much data to the right of it, and since we're testing the absolute value of the mean difference, we ended up getting a p value of **0.0210** for an observed difference in means of **15.3917**. The p value is less than 0.05 meaning that minutes could play a factor in whether a user leaves a review on a recipe that they rate.
 
-### 'n_ingredients'
+#### n_ingredients
 <iframe
   src="assets/ingredients_perm.html"
   width="100%"
@@ -124,3 +124,27 @@ For minutes, we see from the graph the red line indicating the test statistic do
 ></iframe>
 
 For n_ingredients, we see from the graph that the data is more evenly divided between the test statistic, and we end up getting a p value of **0.1470** for an observed difference in means of **0.7183**. The p value is greater than 0.05 meaning that according to the data, the number of ingredients a recipe has, does not affect whether someone would leave a review for a recipe they rated.
+
+## Hypothesis Testing
+The question we're exploring is **do short prep time recipes have significantly different average ratings than long prep time recipes?**  To explore this, we do a permutation test measuring the absolute value of the difference between the average rating of recipes that are short vs recipes that are long, using the previously created is_short column.
+
+ - null hypothesis: The average ratings of short prep time and long prep time recipes are the same.  
+ - alternative hypothesis: Short-prep recipes have a significantly different average rating than long-prep recipes.
+
+ After running a permutation test, we end up with the following chart:
+
+<iframe
+  src="assets/ratings_perm.html"
+  width="100%"
+  height="400"
+  frameborder="0"
+></iframe>
+
+We ended up with a p value of 0.0 with an observed difference of 0.0289 between the means of each dataset. This means that we fail to reject the null hypothesis, and there could be a difference between the average ratings or short prep and long prep recipes. This could be because of the ease of making shorter recipes and the perceived lower expectations for those recipes, leaving people to be more happier with the results they can get in those short periods of time.
+
+## Framing a Prediction Problem
+
+
+
+
+
