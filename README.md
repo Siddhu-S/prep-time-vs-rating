@@ -143,7 +143,9 @@ The question we're exploring is **do short prep time recipes have significantly 
 We ended up with a p value of 0.0 with an observed difference of 0.0289 between the means of each dataset. This means that we fail to reject the null hypothesis, and there could be a difference between the average ratings or short prep and long prep recipes. This could be because of the ease of making shorter recipes and the perceived lower expectations for those recipes, leaving people to be more happier with the results they can get in those short periods of time.
 
 ## Framing a Prediction Problem
+After exploring the data, I now aim to try and **predict the average rating of a recipe** only using time data that users would have access too before they rate the recipe. The data columns I will be using are 'n_steps' and 'time', as they both would signal how long a recipe would take which relates to the previous data exploration I have done through this dataset. This is a **regression** problem, as our response variable **'avg_rating'** is a continuous variable from 1-5 as the average could be any decimal number and not necessarily a whole number.
 
+To evaluate the model's effectiveness I looked at the Mean Squared Error (MSE) because it helps penalize the larger errors between the actual and predicted rating to try and find an accurate representation of how accurate the model is.
 
 
 
