@@ -25,3 +25,28 @@ In this data science project, the **relationship between preparation time and th
 | rating | Rating given      |
 | review | Review text       |
 
+
+With the findings from this project, we can have a better insight into what factors make a recipe more popular (in this case having a higher rating), and it can better inform a food.com user on what recipes, their audience would respond better too.
+
+## Data Cleaning and Exploratory Data Analysis
+### Data Cleaning
+Before starting exploration into the data, we cleaned the data using the following steps in order to combine it all into one dataset and ensure we dealt with any null values or data type errors.
+
+1. Left merge the recipes and interactions dataset on 'id' and 'recipe_id' in order to ensure all recipes stayed in the merged dataset irrespective of whether they have any reviews in the interactions dataset.
+
+2. Replace all the 0s in the ratings column with NaN to ensure they do not skew the analysis, and then use a groupby function to find the average rating of each recipe.
+
+3. Convert data in the 'submitted' column to datetime to make for easier parsing during exploratory data analysis
+
+4. Filter the data, removing all recipes that took 0 minutes or less and recipes that were over 360 minutes or 6 hrs. There were many outliers in the dataset, with some recipes taking multiple weeks, and when looking into relationship between preparation time and average rating, it makes the most sense to look at a generalized dataset of up to six hours which is the general max threshold for the time someone would take to create one meal.
+
+5. Create column 'is_short' to be used in later analysis, gives a boolean value depending on if the prep time for the recipe was less than or equal to 30 minutes
+
+### Exploratory Data Analysis
+<iframe
+  src="assets/prep_hist.html"
+  width="800"
+  height="600"
+  frameborder="0"
+></iframe>
+
