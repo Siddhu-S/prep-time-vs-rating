@@ -163,5 +163,16 @@ To find the best model to use, I used GridSearchCV on these hyperparameters: n_e
 
 With this model, I ended up with a MSE of 0.1988 on the training data and 0.2207 on the testing data, which is a clear improvement upon the previous value, however it creates a bigger gap between the results of the training and testing data.
 
+## Fairness Analysis
+To ensure that my model is fair to all groups, it is important to look at how it performs for shorter prep recipes compared to longer prep recipes, and ensure that it is fair in how it analyzes them. In order to test this, I will conduct a permutation test to see how they perform.
 
+This means that my **Group X: Shorter Prep Recipes** and my **Group Y: Longer Prep Recipes**
 
+- Null Hypothesis: Our model is fair. Its precision for shorter preparation recipes and longer preparation recipes are roughly the same, and any differences are due to random chance.
+- Alternative Hypothesis: Our model is unfair. Its precision for shorter preperation recipes is different than its precision for longer preparation recipes.
+- Test Statistic: Absolute Value Difference between the shorter preparation recipe MSE and longer preparation recipe MSE.
+- Significance Level: 0.05
+
+After completing the permutation test, we find that the observed difference in the MSE between the two groups is 0.024 which gives us a 0.01 p value. Since that is less than 0.05, we can reject the null hypothesis, which means there could be a difference between the model's performance between both groups.
+
+It makes sense that there is some variability between how the model performs because the more preparation a recipe needs, leads to generally more ingredients and more variability in the number of steps that it will take, which can skew the model, while shorter recipes are usually more straightforward.
