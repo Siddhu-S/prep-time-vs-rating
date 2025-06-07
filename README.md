@@ -148,12 +148,20 @@ After exploring the data, I now aim to try and **predict the average rating of a
 To evaluate the model's effectiveness I looked at the Mean Squared Error (MSE) because it helps penalize the larger errors between the actual and predicted rating to try and find an accurate representation of how accurate the model is.
 
 ## Baseline Model
-I build a Linear Regression Pipeline in order to properly predict the average rating of the recipe. Both 'n_steps' and 'time' are quantative discrete variables as they are both represented through whole numbers. I used a StandardScaler on both numbers because they were being represented on different scales, so standardizing the values would help with calculating a more appropiate regression line.
+I build a Linear Regression Pipeline in order to properly predict the average rating of the recipe. Both 'n_steps' and 'time' are quantative discrete variables as they are both represented through whole numbers. I did not standardize any of the variables as the values were not categorical.
 
 After I split the model into a training and testing set, I tested out the model and got back an MSE of 0.2448 for the Training Data and 0.2450 for the Testing Data. 
 
 While it is encouraging that the Training and Testing Data both had similar MSE, the numbers are still relatively high, giving a lot of room for some potential improvement.
 
 ## Final Model
+For my final model, I looked to try and decrease the MSE in a completely new model. Instead of looking at the problem as linear regression, I implemented a **random forest** model, using the previous 'n_steps' and 'minutes', while adding two new data points, 'n_ingredients' and a newly created column 'steps_per_minute' which calculates how long a step takes to complete.
+
+I transformed the 'minutes' data using a QuantileTransformer to normalize the distribution because of how much the data is skewed. The 'steps_per_minute' was transformed using a StandardScaler to better scale the data normally because its based on a ratio.
+
+To find the best model to use, I used GridSearchCV on these hyperparameters: n_estimators, max_depth, and min_samples_leaf, to determine what the optimal values were to ensure the best model. After running GridSearchCV, I found out that the best parameters were  {'model__max_depth': 20, 'model__min_samples_leaf': 1, 'model__n_estimators': 200}
+
+With this model, I ended up with a MSE of 0.1988 on the training data and 0.2207 on the testing data, which is a clear improvement upon the previous value, however it creates a bigger gap between the results of the training and testing data.
+
 
 
