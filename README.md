@@ -150,7 +150,7 @@ To evaluate the model's effectiveness I looked at the Mean Squared Error (MSE) b
 ## Baseline Model
 I build a Linear Regression Pipeline in order to properly predict the average rating of the recipe. Both 'n_steps' and 'time' are quantative discrete variables as they are both represented through whole numbers. I did not standardize any of the variables as the values were not categorical.
 
-After I split the model into a training and testing set, I tested out the model and got back an MSE of 0.2448 for the Training Data and 0.2450 for the Testing Data. 
+After I split the model into a training and testing set, I tested out the model and got back an MSE of **0.2448** for the Training Data and **0.2450** for the Testing Data. 
 
 While it is encouraging that the Training and Testing Data both had similar MSE, the numbers are still relatively high, giving a lot of room for some potential improvement.
 
@@ -159,9 +159,9 @@ For my final model, I looked to try and decrease the MSE in a completely new mod
 
 I transformed the 'minutes' data using a QuantileTransformer to normalize the distribution because of how much the data is skewed. The 'steps_per_minute' was transformed using a StandardScaler to better scale the data normally because its based on a ratio.
 
-To find the best model to use, I used GridSearchCV on these hyperparameters: n_estimators, max_depth, and min_samples_leaf, to determine what the optimal values were to ensure the best model. After running GridSearchCV, I found out that the best parameters were  {'model__max_depth': 20, 'model__min_samples_leaf': 1, 'model__n_estimators': 200}
+To find the best model to use, I used GridSearchCV on these hyperparameters: n_estimators, max_depth, and min_samples_leaf, to determine what the optimal values were to ensure the best model. After running GridSearchCV, I found out that the best parameters were  **{'model__max_depth': 20, 'model__min_samples_leaf': 1, 'model__n_estimators': 200}**
 
-With this model, I ended up with a MSE of 0.1988 on the training data and 0.2207 on the testing data, which is a clear improvement upon the previous value, however it creates a bigger gap between the results of the training and testing data.
+With this model, I ended up with a MSE of **0.1988** on the training data and **0.2207** on the testing data, which is a clear improvement upon the previous value, however it creates a bigger gap between the results of the training and testing data.
 
 ## Fairness Analysis
 To ensure that my model is fair to all groups, it is important to look at how it performs for shorter prep recipes compared to longer prep recipes, and ensure that it is fair in how it analyzes them. In order to test this, I will conduct a permutation test to see how they perform.
@@ -173,6 +173,6 @@ This means that my **Group X: Shorter Prep Recipes** and my **Group Y: Longer Pr
 - Test Statistic: Absolute Value Difference between the shorter preparation recipe MSE and longer preparation recipe MSE.
 - Significance Level: 0.05
 
-After completing the permutation test, we find that the observed difference in the MSE between the two groups is 0.024 which gives us a 0.01 p value. Since that is less than 0.05, we can reject the null hypothesis, which means there could be a difference between the model's performance between both groups.
+After completing the permutation test, we find that the observed difference in the MSE between the two groups is **0.024** which gives us a **0.01** p value. Since that is less than 0.05, we can reject the null hypothesis, which means there could be a difference between the model's performance between both groups.
 
 It makes sense that there is some variability between how the model performs because the more preparation a recipe needs, leads to generally more ingredients and more variability in the number of steps that it will take, which can skew the model, while shorter recipes are usually more straightforward.
